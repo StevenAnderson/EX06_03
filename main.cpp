@@ -6,7 +6,8 @@ int main(){
     string year;
     string name;
     char gender;
-    string ranking="";
+    string ranking[10];
+    int i=0;
     //prompting for variable values
     cout << "Enter the year: ";
     cin >> year;
@@ -31,21 +32,25 @@ int main(){
         if (line.find(name)!=std::string::npos){
             fin.seekg(0, ios::cur);
             //attempting to cycle through line string to copy over ranking
-            int i=0;
-            while (line[i]!=' '){//i is going up past 4000?
-                ranking[i]+=line[i];//get bad access here
+            
+            while (line[i]!='\t'){
+                ranking[i]=line[i];
                 i++;}
             noname=0;
         }
     }
+    //if no name was found
            if (noname==1)
                cout<< "The name "<<name<< " is not found in the year " << year<< endl;
         
     
         
     
-    
-    cout << name << " is ranked #" << ranking << "in the year " << year <<endl;
+    //displaying the stats
+    cout << name << " is ranked #";
+    for (int j=0; j<i;j++)
+        cout << ranking[j];
+    cout << " in the year " << year <<endl;
     
     fin.close();
     
